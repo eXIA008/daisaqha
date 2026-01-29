@@ -16,16 +16,16 @@ export const Footer = () => {
       </p>
       <div className="space-x-8 flex flex-cols items-center"> 
         <a href="https://github.com/eXIA008" className="ounded-full">
-          <SiGithub className="w-6 h-6 text-foreground hover:scale-[1.15] transition-transform duration-300" />
+          <SiGithub className="w-6 h-6 text-muted-foreground hover:scale-[1.15] transition-transform duration-300" />
         </a>
         <a href="https://github.com/eXIA008" className="rounded-full">
-          <SiLinkedin className="w-6 h-6 text-foreground hover:scale-[1.15] transition-transform duration-300" />
+          <SiLinkedin className="w-6 h-6 text-muted-foreground hover:scale-[1.15] transition-transform duration-300" />
         </a>
         <a href="https://github.com/eXIA008" className="rounded-full">
-          <SiGmail className="w-6 h-6 text-foreground hover:scale-[1.15] transition-transform duration-300" />
+          <SiGmail className="w-6 h-6 text-muted-foreground hover:scale-[1.15] transition-transform duration-300" />
         </a>
         <a href="https://instagram.com/daisaq_ha" className="rounded-full">
-          <SiInstagram className="w-6 h-6 text-foreground hover:scale-[1.15] transition-transform duration-300" />
+          <SiInstagram className="w-6 h-6 text-muted-foreground hover:scale-[1.15] transition-transform duration-300" />
         </a>
         <a onClick={scrollToTop} className="p-3 ml-6 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors duration-300">
           <ArrowUp size={20}/>

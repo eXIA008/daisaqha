@@ -1,4 +1,5 @@
 import {ExternalLink, Github, ArrowRight} from "lucide-react"
+
 const projects = [
     {
         id: 1,
@@ -32,7 +33,7 @@ const projects = [
         title: "Portfolio Website",
         description: "Personal portfolio Website.",
         image: "/projects/project4.png",
-        tags: ["React", "Vite", "TailwindCSS"],
+        tags: ["React", "Vite", "TailwindCSS", "Express"],
         demo: "#",
         githubUrl: "/#hero",
     }
@@ -40,16 +41,19 @@ const projects = [
 
 export const ProjectSection = () => {
 
-    return <section id="projects" className="py-24 px-24 md:px-24 relative z-10 bg-transparent">
+    const maxTagsCount = 5;
+
+    return <section id="projects" className="relative py-24 z-10 bg-transparent items-center justify-center">
         <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-left">
                 Featured<span className="text-primary"> Projects</span>
             </h2>
 
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-left text-muted-foreground mb-12 max-w-2xl">
                 Here are some of my projects. Each project is my part of my learning progress
                 to master web development.
             </p>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projects.map((projects, key) => (
                     <div key={key} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover gradient-border">
@@ -58,11 +62,17 @@ export const ProjectSection = () => {
                         </div>
                         <div className="p-6 text-left">
                             <div className="flex flex-wrap gap-2 mb-4">
-                                {projects.tags.map((tags) => (
-                                    <span className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
-                                        {tags}
-                                    </span>
-                                ))}
+                                {projects.tags.map((tags, index) => {
+                                    if (index < maxTagsCount) {
+                                        return (<span className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
+                                            {tags}
+                                        </span>)
+                                    } else {
+                                        return (<span className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
+                                            ...
+                                        </span>)
+                                    }
+                                })}
                             </div>
                             <h3 className="text-xl font-semibold mb-2">
                                 {projects.title != "" ? projects.title : "Coming Soon"}
