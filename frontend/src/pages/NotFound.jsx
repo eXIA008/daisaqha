@@ -1,5 +1,5 @@
 import { Footer } from "../components/Footer"
-import { Navbar } from "../components/NavBar"
+import { Navbar } from "../components/Navbar"
 import { NotFoundSection } from "../components/NotFoundSection"
 import { StarBackground } from "../components/StarBackground"
 import { ThemeToggle } from "../components/ThemeToggle"
@@ -8,7 +8,7 @@ export const NotFound = () => {
     
 
     return (
-        <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        <div className="min-h-screen bg-transparent text-foreground overflow-x-hidden font-roboto">
             <ThemeToggle />
             <StarBackground />
             <Navbar />
