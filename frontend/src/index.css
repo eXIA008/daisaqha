@@ -1,17 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
 
-
   --color-card: hsl(var(--card));
 
+  --font-roboto: "Roboto Mono", monospace;
 
   /* Ini belum dianimasiin */
   --animate-float: float 6s ease-in-out infinite;
@@ -23,6 +24,7 @@
   --animate-fade-in-delay3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-fade-in-delay5: fade-in 0.7s ease-out 1.0s forwards;
+  --animate-fade-in-delay6: fade-in 0.7s ease-out 1.2s forwards;
   --animate-meteor: meteor 5s linear infinite;
 
   /* keyframe animasi dari atas ini */
@@ -45,7 +47,7 @@
     }
 
     50% {
-      opacity: 0.8;
+      opacity: 0.4;
     }
   }
 
@@ -98,6 +100,8 @@
     --primary-foreground: 210 40% 98%;
 
     --border: 214 32% 91%;
+
+
   }
 
   /* dark mode */
@@ -124,7 +128,7 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -157,10 +161,10 @@
   }
 }
 
-/* @apply itu buat langsunge ngeapply css style dari berbagai class lain dijadiin satu */
+/* @apply itu buat langsung ngeapply css style dari berbagai class lain dijadiin satu */
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5 );
 }
 
 @utility card-hover {
@@ -187,6 +191,10 @@
 @utility meteor {
   @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
   box-shadow: 0 0 10x 2px rgba(255, 255, 255, 0.3);
+}
+
+@utility gradient-navbar {
+  @apply bg-gradient-to-b from-background to-transparent;
 }
 
 #root {

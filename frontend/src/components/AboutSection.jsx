@@ -1,7 +1,7 @@
 import { Code, Briefcase, Download } from "lucide-react"
 
 export const AboutSection = () => {
-    return <section id="about" className="py-24 px-24 relative"> 
+    return <section id="about" className="py-24 px-24 md:px-24 relative z-10 bg-transparent"> 
         <div className="container mx-auto max-w-5xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
                 About<span className="text-primary"> Me</span>
@@ -13,11 +13,9 @@ export const AboutSection = () => {
                         Actually i wasn't suppose to be here, btu here i'am in the programming world. Currently learning
                         how to make reliable, secure, and performant web applications using modern technologies. 
                     </p>
-
                     <p className="text-muted-foreground">
                         Lorem Ipsum
                     </p>
-
                     <div className="flex flex-cols sm:flex-row gap-4 pt-4 justify-center">
                         <a href="#contact" className="cosmic-button"> 
                             Get in Touch
