@@ -1,4 +1,4 @@
-import {ExternalLink, Github, ArrowRight} from "lucide-react"
+import { ExternalLink, Github, ArrowRight } from "lucide-react"
 
 const projects = [
     {
@@ -53,7 +53,7 @@ export const ProjectSection = () => {
                 Here are some of my projects. Each project is my part of my learning progress
                 to master web development.
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projects.map((projects, key) => (
                     <div key={key} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover gradient-border">
@@ -64,11 +64,11 @@ export const ProjectSection = () => {
                             <div className="flex flex-wrap gap-2 mb-4">
                                 {projects.tags.map((tags, index) => {
                                     if (index < maxTagsCount) {
-                                        return (<span className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
+                                        return (<span key={index} className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
                                             {tags}
                                         </span>)
                                     } else {
-                                        return (<span className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
+                                        return (<span key={index} className="px-2 py-1 text-xs border font-medium rounded-full bg-secondary text-secondary-foreground">
                                             ...
                                         </span>)
                                     }
@@ -78,10 +78,10 @@ export const ProjectSection = () => {
                                 {projects.title != "" ? projects.title : "Coming Soon"}
                             </h3>
                             <p className="text-muted-foreground text-sm mb-4">
-                                    {projects.description}
+                                {projects.description}
                             </p>
                             <a className="text-foreground/80 hover:text-primary transition-all duration-300" target={projects.id == 4 ? "" : "_blank"} href={projects.githubUrl} >
-                                {(projects.githubUrl != "#" && projects.id != 4)  ? "GitHub" : projects.id == 4 ? "You're Here!" : ""}
+                                {(projects.githubUrl != "#" && projects.id != 4) ? "GitHub" : projects.id == 4 ? "You're Here!" : ""}
                             </a>
                         </div>
                     </div>

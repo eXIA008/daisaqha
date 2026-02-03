@@ -1,35 +1,22 @@
-import { useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
+import StackIcon from "tech-stack-icons";
 
 const DEFAULT_IMAGES = [
-  {
-    src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Abstract art'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Modern sculpture'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Digital artwork'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Contemporary art'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Geometric pattern'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    alt: 'Textured surface'
-  },
-  {
-    src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large',
-    alt: 'Social media image'
-  }
+  { Icon: <StackIcon name="c++" />, alt: 'c++' },
+  { Icon: <StackIcon name="python" />, alt: 'python' },
+  { Icon: <StackIcon name="go" />, alt: 'golang' },
+  { Icon: <StackIcon name="java" />, alt: 'java' },
+  { Icon: <StackIcon name="js" />, alt: 'javascript' },
+  { Icon: <StackIcon name="colab" />, alt: 'colab' },
+  { Icon: <StackIcon name="flask" />, alt: 'flask' },
+  { Icon: <StackIcon name="react" />, alt: 'react' },
+  { Icon: <StackIcon name="html5" />, alt: 'html5' },
+  { Icon: <StackIcon name="tailwindcss" />, alt: 'tailwindcss' },
+  { Icon: <StackIcon name="azure" />, alt: 'azure' },
+  { Icon: <StackIcon name="mysql" />, alt: 'mysql' },
+  { Icon: <StackIcon name="nodejs" />, alt: 'nodejs' },
+  { Icon: <StackIcon name="vitejs" />, alt: 'vitejs' }
 ];
 
 const DEFAULTS = {
@@ -75,7 +62,22 @@ function buildItems(pool, seg) {
     if (typeof image === 'string') {
       return { src: image, alt: '' };
     }
-    return { src: image.src || '', alt: image.alt || '' };
+
+    let { Icon, icon } = image;
+    // Jika Icon adalah elemen React (seperti <StackIcon />), perlakukan sebagai instance (icon)
+    if (Icon && React.isValidElement(Icon)) {
+      icon = Icon;
+      Icon = null;
+    }
+
+    return {
+      src: image.src || '',
+      alt: image.alt || '',
+      Icon: Icon ?? null, // component ref
+      icon: icon ?? null, // legacy: element instance
+      href: image.href ?? null,
+      color: image.color ?? null
+    };
   });
 
   const usedImages = Array.from({ length: totalSlots }, (_, i) => normalizedImages[i % normalizedImages.length]);
@@ -96,7 +98,11 @@ function buildItems(pool, seg) {
   return coords.map((c, i) => ({
     ...c,
     src: usedImages[i].src,
-    alt: usedImages[i].alt
+    alt: usedImages[i].alt,
+    Icon: usedImages[i].Icon ?? null,
+    icon: usedImages[i].icon ?? null,
+    href: usedImages[i].href ?? null,
+    color: usedImages[i].color ?? null
   }));
 }
 
@@ -757,6 +763,16 @@ export default function DomeGallery({
       inset: 10px;
       pointer-events: none;
     }
+
+    .dg-icon {
+      width: 60%;
+      height: 60%;
+      display: block;
+      pointer-events: none;
+      object-fit: cover;
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+      transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
+    }
   `;
 
   return (
@@ -776,7 +792,7 @@ export default function DomeGallery({
       >
         <main
           ref={mainRef}
-          className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent"
+          className="absolute inset-0 grid place-items-center overflow-hidden select-none"
           style={{
             touchAction: 'none',
             WebkitUserSelect: 'none'
@@ -806,7 +822,7 @@ export default function DomeGallery({
                   }}
                 >
                   <div
-                    className="item__image absolute block overflow-hidden cursor-pointer bg-gray-200 transition-transform duration-300"
+                    className="item__image absolute block overflow-hidden cursor-pointer transition-transform duration-300"
                     role="button"
                     tabIndex={0}
                     aria-label={it.alt || 'Open image'}
@@ -831,16 +847,21 @@ export default function DomeGallery({
                       backfaceVisibility: 'hidden'
                     }}
                   >
-                    <img
-                      src={it.src}
-                      draggable={false}
-                      alt={it.alt}
-                      className="w-full h-full object-cover pointer-events-none"
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        filter: `var(--image-filter, ${grayscale ? 'grayscale(1)' : 'none'})`
-                      }}
-                    />
+                    {it.Icon ? (
+                      React.createElement(it.Icon, { className: 'dg-icon', 'aria-hidden': true, style: { color: it.color } })
+                    ) : it.icon ? (
+                      React.isValidElement(it.icon)
+                        ? React.cloneElement(it.icon, { className: `dg-icon ${it.icon.props?.className ?? ''}` })
+                        : <span className="dg-icon">{it.icon}</span>
+                    ) : it.src ? (
+                      <img
+                        src={it.src}
+                        draggable={false}
+                        alt={it.alt}
+                        className="dg-icon"
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      />
+                    ) : null}
                   </div>
                 </div>
               ))}
@@ -848,14 +869,14 @@ export default function DomeGallery({
           </div>
 
           <div
-            className="absolute inset-0 m-auto z-[3] pointer-events-none"
+            className="absolute inset-0 m-auto z-3 pointer-events-none"
             style={{
               backgroundImage: `radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, ${overlayBlurColor}) 100%)`
             }}
           />
 
           <div
-            className="absolute inset-0 m-auto z-[3] pointer-events-none"
+            className="absolute inset-0 m-auto z-3 pointer-events-none"
             style={{
               WebkitMaskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
               maskImage: `radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, ${overlayBlurColor}) 90%)`,
@@ -864,7 +885,7 @@ export default function DomeGallery({
           />
 
           <div
-            className="absolute left-0 right-0 top-0 h-[120px] z-[5] pointer-events-none rotate-180"
+            className="absolute left-0 right-0 top-0 h-[120px] z-5 pointer-events-none rotate-180"
             style={{
               background: `linear-gradient(to bottom, transparent, var(--overlay-blur-color, ${overlayBlurColor}))`
             }}
