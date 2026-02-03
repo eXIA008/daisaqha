@@ -8,19 +8,22 @@ export const AboutSection = () => {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                <div className="space-y-6 text-left">
+                <div className="space-y-6 text-left max-w-xl">
                     <h3 className="text-2xl font-semibold">Passionate Fullstack Developer</h3>
                     <p className="text-muted-foreground">
                         Actually i wasn't suppose to be here, but here i'am in the programming world. Currently learning
                         how to make reliable, secure, and performant web applications using modern technologies. 
                     </p>
                     <p className="text-muted-foreground">
-                        Lorem Ipsum ibfiebfiybfiwybfiybfeiewebfwibfwyefbiwfbywibfd
-                        uwdiwdnwidwwidnwidwidwduwdiwndidnwdiwdiwdwidwd
-                        anjinguadbaubaydbauwdyaubywduawbdaywbyaudywdbd
-                        odnqindqidqdiqwdumdwodddd
-                        wdnwd
-                        wdnwdwd
+                        Suspendisse potenti. Pellentesque pellentesque ante sit
+                         amet commodo cursus. Integer urna nisl, porttitor id just
+                         o vitae, iaculis interdum nibh. Nullam vel lectus sapien. Donec e
+                         uismod, nulla ut consequat sodales, lectus ipsum mattis erat, vitae 
+                         feugiat mauris sapien luctus nisi. Nam nec enim luctus, euismod lorem 
+                         in, faucibus leo. Nullam bibendum turpis vitae magna laoreet lacinia. 
+                         Integer dui diam, pretium et tellus sit amet, volutpat elementum ante. 
+                         Aliquam euismod sapien id malesuada dapibus. Pellentesque venenatis tel
+                         lus at sapien lobortis, at imperdiet ex convallis.
                     </p>
                     <div className="flex md:flex-cols flex-row gap-4 pt-4 justify-center text-center">
                         <a href="#contact" className="cosmic-button "> 
